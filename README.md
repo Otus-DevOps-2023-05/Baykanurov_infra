@@ -48,3 +48,13 @@ OpenVPN, можно проверить успешность подключени
 ```bash
 ssh -i ~/.ssh/id_rsa baykanurov@10.128.0.16
 ```
+
+## Cloud Testapp
+### Testapp Info
+testapp_IP = 51.250.74.93  
+testapp_port = 9292
+
+
+
+
+
