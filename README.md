@@ -54,7 +54,21 @@ ssh -i ~/.ssh/id_rsa baykanurov@10.128.0.16
 testapp_IP = 51.250.74.93  
 testapp_port = 9292
 
-
+### Дополнительное задание
+Startup Script находится в файле startup.sh
+#### Используемая команда CLI:
+```shell
+yc compute instance create \
+  --name reddit-app \
+  --hostname reddit-app \
+  --memory=4 \
+  --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB \
+  --network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
+  --metadata serial-port-enable=1 \
+  --metadata-from-file user-data=./startup.sh \
+  --ssh-key ~/.ssh/id_ed25519.pub
+```
+Данная команда триггерит после создания нового инстанса ВМ скрипт startup.sh который проводит полную установку и развертование приложения, в том числе с установкой и разверткой дополнительных компонентов. 
 
 
 
