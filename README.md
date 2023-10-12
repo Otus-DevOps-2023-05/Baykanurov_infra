@@ -69,3 +69,25 @@ yc compute instance create \
   --ssh-key ~/.ssh/id_ed25519.pub
 ```
 Данная команда триггерит после создания нового инстанса ВМ скрипт startup.sh который проводит полную установку и развертование приложения, в том числе с установкой и разверткой дополнительных компонентов.
+
+
+## Packer Base
+### Что было сделано
+1. Установлен Packer версии 1.8.7.
+2. Создан сервисный аккаунт для Packer в Yandex.Cloud.
+3. Создан файл ubuntu16.json для создания reddit-base образа.
+4. Создана вм `packer-base-dz` на основе reddit-base образа на ней развернуто приложение reddit.
+Доступность можно проверить по адресу `http://51.250.90.203:9292/`
+5. Также был параметризован ubuntu16.json.
+Команда запуска `packer build -var-file ./variables.json ./ubuntu16.json`
+
+### Дополнительное задание
+1. Были созданы следующие файлы:
+- **immutable.json** - для создания reddit-full образа.
+- **files/deploy.sh** - установка reddit и запуск сервиса.
+- **files/puma.service** - копируется в образ для настройки работы reddit как сервиса.
+
+Команда запуска:
+`packer build -var-file ./variables.json ./immutable.json`
+
+2. Был создан скрипт **config-scripts/create-reddit-vm.sh** который создаёт ВМ из образа reddit-full.
