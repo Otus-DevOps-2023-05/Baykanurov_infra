@@ -91,3 +91,15 @@ yc compute instance create \
 `packer build -var-file ./variables.json ./immutable.json`
 
 2. Был создан скрипт **config-scripts/create-reddit-vm.sh** который создаёт ВМ из образа reddit-full.
+
+## Terraform-1
+Версия Terraform: 0.12.8
+Версия provider.yandex: 0.56.0
+### Файлы:
+- main.tf - содержит интсрукции по созданию инстанса ВМ с Reddit из базового образа (reddit-base)
+- variables.tf - описание переменных
+- terraform.tvars - значения переменных (пример в terraform.tvars.example)
+- outputs.tf - выходные переменные
+### Дополнительное задание
+1. Файл lb.tf содержит инструкции по созданию балансировщика нагрузки и группы для него;
+2. Для использования только одного файла для создания нескольких инстансов reddit-app была использована опция Count
