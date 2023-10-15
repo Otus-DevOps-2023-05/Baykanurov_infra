@@ -1,0 +1,9 @@
+cloud_id                 = "xxxxxxxxxxxxxxxxxxxxxx"
+folder_id                = "xxxxxxxxxxxxxxxxxxxxxx"
+zone                     = "ru-central1-a"
+image_id                 = "xxxxxxxxxxxxxxxxxxxxxx"
+public_key_path          = "xxxxxxxxxxxxxxxxxxxxxx/.ssh/xxxxxxxxxxxxxxxxxxxxxx.pub"
+private_key_path         = "xxxxxxxxxxxxxxxxxxxxxx/.ssh/xxxxxxxxxxxxxxxxxxxxxx"
+subnet_id                = "xxxxxxxxxxxxxxxxxxxxxx"
+service_account_key_file = "xxxxxxxxxxxxxxxxxxxxxx/key.json"
+count_instance           = 2
