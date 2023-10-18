@@ -24,10 +24,10 @@ resource "yandex_compute_instance" "db" {
   }
 
   connection {
-    type  = "ssh"
-    host  = self.network_interface.0.nat_ip_address
-    user  = "ubuntu"
-    agent = false
+    type        = "ssh"
+    host        = self.network_interface.0.nat_ip_address
+    user        = "ubuntu"
+    agent       = false
     private_key = file(var.private_key_path)
   }
 
@@ -38,4 +38,5 @@ resource "yandex_compute_instance" "db" {
 
   provisioner "remote-exec" {
     script = "${path.module}/files/change_mongod_conf.sh"
+  }
 }
