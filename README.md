@@ -110,3 +110,72 @@ yc compute instance create \
 ### Дополнительное задание
 - Настроил Хранилище S3 для сохранения terraform.tfstate
 - Настроил provisioner для модулей app и db
+
+## Ansible-1
+### Что было сделано
+1. Установлен ansible версии 2.10.8
+2. Развёрнута инфраструктура stage с помощью terraform из ДЗ terraform-2
+3. Изучены основные команды ansible
+4. Написан playbook clone.yml
+```shell
+[0:48:59] baykanurov:ansible git:(ansible-1*) $ ansible-playbook clone.yml
+
+PLAY [Clone] ***************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************
+ok: [appserver]
+
+TASK [Clone repo] **********************************************************************************************************************************
+ok: [appserver]
+
+PLAY RECAP *****************************************************************************************************************************************
+appserver                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[0:49:12] baykanurov:ansible git:(ansible-1*) $ ansible app -m command -a 'rm -rf ~/reddit'
+
+[WARNING]: Consider using the file module with state=absent rather than running 'rm'.  If you need to use command because file is insufficient you
+can add 'warn: false' to this command task or set 'command_warnings=False' in ansible.cfg to get rid of this message.
+appserver | CHANGED | rc=0 >>
+
+[0:49:25] baykanurov:ansible git:(ansible-1*) $ ansible-playbook clone.yml
+
+PLAY [Clone] ***************************************************************************************************************************************
+
+TASK [Gathering Facts] *****************************************************************************************************************************
+ok: [appserver]
+
+TASK [Clone repo] **********************************************************************************************************************************
+changed: [appserver]
+
+PLAY RECAP *****************************************************************************************************************************************
+appserver                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+```
+Почему так произошло?
+Ответ: Сначала репозиторий ~/reddit уже был на ВМ, поэтому ничего не изменилось, а когда мы удалили его и запустили заново playbook, у нас произошли изменения (т.е. склонировался репозиторий и создался новый каталог)
+
+### Дополнительное задание
+1. Создайте файл inventory.json в формате описанном в методичке
+2. Создан простой скрипт inventory.py на python 3.10 который просто выводит в json-формате необходимую нам конфигурацию inventory
+3. Поменена конфигурация ansible.cfg с учетом скрипта
+4. Результат успешный:
+```shell
+[1:34:00] baykanurov:ansible git:(ansible-1*) $ ansible all -m ping
+reddit-db | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+reddit-app | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+```
+5. Различия схем JSON для динамического и статического инвентори:
+   - Для статического инвентори, схема JSON является простой структурой, представляющей список хостов и их атрибуты
+   - В случае динамического инвентори в Ansible, схема JSON содержит информацию о хостах, группах хостов и других динамических параметрах, которые могут быть определены программно.
