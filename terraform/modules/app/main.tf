@@ -30,13 +30,13 @@ resource "yandex_compute_instance" "app" {
     private_key = file("${var.private_key_path}")
   }
 
-  provisioner "file" {
-    content     = templatefile("${path.module}/files/puma.service", { mongod_ip = var.mongod_ip })
-    destination = "/tmp/puma.service"
-  }
-
-  provisioner "remote-exec" {
-    script = "${path.module}/files/deploy.sh"
-  }
+#  provisioner "file" {
+#    content     = templatefile("${path.module}/files/puma.service", { mongod_ip = var.mongod_ip })
+#    destination = "/tmp/puma.service"
+#  }
+#
+#  provisioner "remote-exec" {
+#    script = "${path.module}/files/deploy.sh"
+#  }
 
 }
