@@ -8,5 +8,5 @@ packer/variables.json
 *.tfvars
 .terraform/
 *.retry
-ansible/roles/jdauphant.nginx
+**/roles/jdauphantnginx/*
 jdauphant.nginx
