@@ -4,4 +4,4 @@
   become: true
   roles:
     - app
-    - jdauphantnginx
+    - jdauphant.nginx
