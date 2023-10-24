@@ -1,0 +1,7 @@
+{
+    "folder_id": "123",
+    "source_image_family": "ubuntu-1604-lts",
+    "service_account_key_file": "./key.json",
+    "ssh_username": "ubuntu",
+    "image_description": "packer-test"
+}
