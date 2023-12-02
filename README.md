@@ -193,3 +193,18 @@ reddit-app | SUCCESS => {
 - Описал два окружения stage и prod
 - Использовал коммьюнити роль nginx
 - Использовал Ansible Vault для окружений
+
+## Ansible-4
+### Что было сделано
+1. Установил Virtual Box и Vagrant
+2. Создал ВМ с помощью [Vagrantfile](ansible%2FVagrantfile)
+```shell
+vagrant up
+```
+3. Доработал роли db и app для провижининга в Vagrant'е
+   - Добавил установку Python
+   - Разнес tasks по разным файлам
+   - Переопределил переменные
+4. Создал виртуальное окружение Python
+5. Установил molecule и зависимости
+6. Протестировал роль db с помощью molecule
